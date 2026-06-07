@@ -10,7 +10,7 @@ const projetos: Projeto[] = [
   {
     nome: "DrenaApp",
     tag: "SaaS · Engenharia",
-    url: "https://drenaapp.com.br",
+    url: "https://drenaapp.online",
     label: ["DRENA", "APP"],
   },
   {

@@ -35,8 +35,11 @@ export default function Footer() {
         </p>
         <nav aria-label="Redes sociais" style={{ display: "flex", gap: 20 }}>
           {[
-            { label: "Instagram", href: "#" },
-            { label: "LinkedIn", href: "#" },
+            //{ label: "Instagram", href: "#" },
+            {
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/company/nexus-tecnologia-sc",
+            },
             { label: "WhatsApp", href: "https://wa.me/5547997537883" },
           ].map((l) => (
             <a
