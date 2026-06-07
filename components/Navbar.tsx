@@ -1,14 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const links = [
-  { label: "Expertise", href: "#expertise" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Portfólio", href: "#portfolio" },
-  { label: "Parceiros", href: "#parceiros" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Contato", href: "#contato" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Portfólio", href: "/#portfolio" },
+  { label: "Parceiros", href: "/#parceiros" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Contato", href: "/#contato" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const WA_URL =
@@ -39,7 +41,8 @@ export default function Navbar() {
           margin: "0 auto",
         }}
       >
-        <a
+        {/* Logo */}
+        <Link
           href="/"
           style={{
             fontSize: 20,
@@ -50,9 +53,9 @@ export default function Navbar() {
           }}
         >
           NEXUS<span style={{ color: "#2d8cff" }}>.</span>
-        </a>
+        </Link>
 
-        {/* Desktop */}
+        {/* Desktop links */}
         <ul
           style={{
             display: "flex",
@@ -65,7 +68,7 @@ export default function Navbar() {
         >
           {links.map((l) => (
             <li key={l.label}>
-              <a
+              <Link
                 href={l.href}
                 style={{
                   fontSize: 13,
@@ -74,11 +77,12 @@ export default function Navbar() {
                 }}
               >
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
+        {/* Desktop CTA */}
         <a
           href={WA_URL}
           target="_blank"
@@ -92,24 +96,26 @@ export default function Navbar() {
             fontSize: 13,
             fontWeight: 600,
             textDecoration: "none",
+            whiteSpace: "nowrap",
           }}
         >
           Solicitar orçamento
         </a>
 
-        {/* Mobile hamburger */}
+        {/* Mobile burger */}
         <button
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           onClick={() => setOpen(!open)}
+          className="nx-show-mobile"
           style={{
-            display: "none",
             background: "none",
             border: "none",
             color: "#fff",
-            fontSize: 24,
+            fontSize: 26,
             cursor: "pointer",
+            lineHeight: 1,
+            padding: 4,
           }}
-          className="nx-show-mobile"
         >
           {open ? "✕" : "☰"}
         </button>
@@ -119,16 +125,16 @@ export default function Navbar() {
       {open && (
         <div
           style={{
-            background: "rgba(8,12,20,0.98)",
-            padding: "16px 24px",
+            background: "rgba(8,12,20,0.99)",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
+            padding: "16px 24px 24px",
             display: "flex",
             flexDirection: "column",
-            gap: 16,
+            gap: 0,
           }}
         >
           {links.map((l) => (
-            <a
+            <Link
               key={l.label}
               href={l.href}
               onClick={() => setOpen(false)}
@@ -136,25 +142,28 @@ export default function Navbar() {
                 fontSize: 15,
                 color: "rgba(255,255,255,0.8)",
                 textDecoration: "none",
+                padding: "12px 0",
+                borderBottom: "0.5px solid rgba(255,255,255,0.06)",
               }}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
           <a
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
             style={{
               background: "#2d8cff",
               color: "#fff",
-              padding: "12px 20px",
+              padding: "14px 20px",
               borderRadius: 6,
               fontSize: 14,
               fontWeight: 600,
               textDecoration: "none",
               textAlign: "center",
-              marginTop: 8,
+              marginTop: 16,
             }}
           >
             Solicitar orçamento

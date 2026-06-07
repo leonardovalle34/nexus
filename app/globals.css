@@ -47,7 +47,14 @@ body {
   padding: 70px 24px;
 }
 
+.servicos-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
 @media (max-width: 768px) {
+  .servicos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
   .nx-section {
     padding: 50px 20px;
   }
