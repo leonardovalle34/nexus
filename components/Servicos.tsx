@@ -107,9 +107,9 @@ export default function Servicos() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
             gap: 12,
           }}
+          className="servicos-grid"
         >
           {servicos.map((s) => (
             <article
