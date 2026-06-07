@@ -62,6 +62,226 @@ const pillars: Pillar[] = [
   },
 ];
 
+function DesktopPillars({
+  active,
+  setActive,
+}: {
+  active: number;
+  setActive: (i: number) => void;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        gap: 6,
+        position: "relative",
+        paddingBottom: 50,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: "-24px",
+          right: "-24px",
+          height: 50,
+          background:
+            "linear-gradient(to bottom, transparent, rgba(10,20,80,0.45))",
+          borderTop: "1px solid rgba(45,140,255,0.15)",
+        }}
+      />
+      {pillars.map((p, i) => {
+        const isActive = active === i;
+        return (
+          <div
+            key={p.num}
+            role="button"
+            tabIndex={0}
+            aria-label={p.title}
+            onMouseEnter={() => setActive(i)}
+            onClick={() => setActive(i)}
+            onKeyDown={(e) => e.key === "Enter" && setActive(i)}
+            style={{
+              position: "relative",
+              zIndex: 2,
+              cursor: "pointer",
+              flex: 1,
+              minWidth: 0,
+            }}
+          >
+            <div
+              style={{
+                clipPath:
+                  "polygon(12% 0%, 88% 0%, 100% 14%, 100% 100%, 0% 100%, 0% 14%)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                padding: "14px 10px",
+                background: p.bg,
+                height: isActive ? p.height + 40 : p.height,
+                width: "100%",
+                filter: isActive ? "brightness(1.25)" : "brightness(1)",
+                transition: "all 0.3s ease",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: "12%",
+                  right: 0,
+                  height: 1.5,
+                  background: "rgba(255,255,255,0.3)",
+                }}
+              />
+              <p
+                style={{
+                  fontSize: 9,
+                  color: "rgba(255,255,255,0.45)",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
+                  marginBottom: 5,
+                }}
+              >
+                {p.num}
+              </p>
+              <p
+                style={{
+                  fontSize: 10,
+                  fontWeight: 800,
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  lineHeight: 1.2,
+                }}
+              >
+                {p.title}
+              </p>
+              {isActive && (
+                <>
+                  <i
+                    className={`ti ${p.icon}`}
+                    aria-hidden="true"
+                    style={{
+                      fontSize: 22,
+                      color: "rgba(255,255,255,0.9)",
+                      margin: "8px 0 6px",
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontSize: 10,
+                      color: "rgba(255,255,255,0.75)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {p.desc}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function MobileCards({
+  active,
+  setActive,
+}: {
+  active: number;
+  setActive: (i: number) => void;
+}) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 10,
+      }}
+    >
+      {pillars.map((p, i) => {
+        const isActive = active === i;
+        return (
+          <div
+            key={p.num}
+            role="button"
+            tabIndex={0}
+            aria-label={p.title}
+            onClick={() => setActive(i)}
+            onKeyDown={(e) => e.key === "Enter" && setActive(i)}
+            style={{
+              background: isActive ? p.bg : "rgba(255,255,255,0.04)",
+              border: isActive
+                ? `1px solid ${p.bg}`
+                : "0.5px solid rgba(255,255,255,0.09)",
+              borderRadius: 12,
+              padding: "16px 14px",
+              cursor: "pointer",
+              transition: "all 0.25s ease",
+              textAlign: "left",
+            }}
+          >
+            <p
+              style={{
+                fontSize: 9,
+                color: isActive
+                  ? "rgba(255,255,255,0.6)"
+                  : "rgba(255,255,255,0.3)",
+                fontWeight: 700,
+                letterSpacing: "0.06em",
+                marginBottom: 6,
+              }}
+            >
+              {p.num}
+            </p>
+            <i
+              className={`ti ${p.icon}`}
+              aria-hidden="true"
+              style={{
+                fontSize: 20,
+                color: isActive ? "#fff" : "#2d8cff",
+                display: "block",
+                marginBottom: 8,
+              }}
+            />
+            <p
+              style={{
+                fontSize: 12,
+                fontWeight: 800,
+                color: "#fff",
+                textTransform: "uppercase",
+                letterSpacing: "0.03em",
+                marginBottom: 6,
+              }}
+            >
+              {p.title}
+            </p>
+            {isActive && (
+              <p
+                style={{
+                  fontSize: 11,
+                  color: "rgba(255,255,255,0.7)",
+                  lineHeight: 1.5,
+                }}
+              >
+                {p.desc}
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Expertise() {
   const [active, setActive] = useState<number>(1);
 
@@ -118,129 +338,14 @@ export default function Expertise() {
           agilidade, design moderno e foco em resultados reais.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            gap: 6,
-            position: "relative",
-            paddingBottom: 50,
-            overflow: "hidden",
-          }}
-        >
-          {/* Floor */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: "-24px",
-              right: "-24px",
-              height: 50,
-              background:
-                "linear-gradient(to bottom, transparent, rgba(10,20,80,0.45))",
-              borderTop: "1px solid rgba(45,140,255,0.15)",
-            }}
-          />
+        {/* Desktop */}
+        <div className="nx-hide-mobile">
+          <DesktopPillars active={active} setActive={setActive} />
+        </div>
 
-          {pillars.map((p, i) => {
-            const isActive = active === i;
-            return (
-              <div
-                key={p.num}
-                role="button"
-                tabIndex={0}
-                aria-label={p.title}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => setActive(i)}
-                onKeyDown={(e) => e.key === "Enter" && setActive(i)}
-                style={{
-                  position: "relative",
-                  zIndex: 2,
-                  cursor: "pointer",
-                  flex: 1,
-                  minWidth: 0,
-                }}
-              >
-                <div
-                  style={{
-                    clipPath:
-                      "polygon(12% 0%, 88% 0%, 100% 14%, 100% 100%, 0% 100%, 0% 14%)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    padding: "14px 10px",
-                    background: p.bg,
-                    height: isActive ? p.height + 40 : p.height,
-                    width: "100%",
-                    filter: isActive ? "brightness(1.25)" : "brightness(1)",
-                    transition: "all 0.3s ease",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* top border line */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: "12%",
-                      right: 0,
-                      height: 1.5,
-                      background: "rgba(255,255,255,0.3)",
-                    }}
-                  />
-
-                  <p
-                    style={{
-                      fontSize: 9,
-                      color: "rgba(255,255,255,0.45)",
-                      fontWeight: 700,
-                      letterSpacing: "0.06em",
-                      marginBottom: 5,
-                    }}
-                  >
-                    {p.num}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 800,
-                      color: "#fff",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {p.title}
-                  </p>
-
-                  {isActive && (
-                    <>
-                      <i
-                        className={`ti ${p.icon}`}
-                        aria-hidden="true"
-                        style={{
-                          fontSize: 22,
-                          color: "rgba(255,255,255,0.9)",
-                          margin: "8px 0 6px",
-                        }}
-                      />
-                      <p
-                        style={{
-                          fontSize: 10,
-                          color: "rgba(255,255,255,0.75)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        {p.desc}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+        {/* Mobile */}
+        <div className="nx-show-mobile">
+          <MobileCards active={active} setActive={setActive} />
         </div>
       </div>
     </section>

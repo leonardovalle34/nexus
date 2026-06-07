@@ -5,7 +5,7 @@ type Parceiro = { label: [string, string]; small?: boolean };
 const parceiros: Parceiro[] = [
   { label: ["SC.GOV", ".BR"], small: true },
   { label: ["2", "MUNDOS"] },
-  { label: ["R7", "SYS"] },
+  { label: ["RT", "SYS"] },
   { label: ["MORADA ", "CARMEM"], small: true },
   { label: ["FAST", "ENGLISH"], small: true },
   { label: ["DRENA", "APP"] },
